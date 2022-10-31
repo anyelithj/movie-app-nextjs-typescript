@@ -6,6 +6,7 @@ import requests from '../utils/requests'
 import { Movie } from '../typings'
 import Row from '../components/Row'
 import useAuth from '../hooks/useAuth'
+import useList from '../hooks/useList'
 import { useRecoilValue } from 'recoil'
 import { useState } from 'react'
 import { modalState } from '../atom/ModaAtoml'
@@ -32,12 +33,13 @@ const Home = ({
   topRated,
   trendingNow,
 }:Props) => {
-  const { loading} = useAuth()
-  // const showModal = useRecoilValue(modalState)
-  const [showModal, setShowModal] = useState(false)
+  const { loading, user} = useAuth()
+  const showModal = useRecoilValue(modalState)
+  // const [showModal, setShowModal] = useState(false)
+  const list = useList(user?.uid)
 
   if(loading) return null
-  console.log(netflixOriginals)
+  // console.log(netflixOriginals)
   return (
     <div className="relative h-screen bg-gradient-to-b lg:h-[140vh]">
       <Head>
@@ -54,7 +56,7 @@ const Home = ({
           <Row title="Top Rated" movies={topRated} />
           <Row title="Action Thrillers" movies={actionMovies} />
           {/* My List Component */}
-          {/* {list.length > 0 && <Row title="My List" movies={list} />} */}
+          {list.length > 0 && <Row title="My List" movies={list.map((list) => list.id)} />}
           <Row title="Comedies" movies={comedyMovies} />
           <Row title="Scary Movies" movies={horrorMovies} />
           <Row title="Romance Movies" movies={romanceMovies} />
@@ -102,4 +104,3 @@ export const getServerSideProps = async () => {
   }
 }
 
-// https://github.com/lukef7fywmrp/netflix-clone-yt/blob/main/pages/index.tsx
