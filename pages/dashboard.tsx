@@ -1,4 +1,3 @@
-// import type { NextPage } from 'next'
 import Head from 'next/head'
 import Header from '../components/Header'
 import Banner from '../components/Banner'
@@ -22,9 +21,9 @@ interface Props {
   horrorMovies: Movie[]
   romanceMovies: Movie[]
   documentaries: Movie[]
-}
+} 
 
-const Home = ({
+const Dashboard = ({
   netflixOriginals,
   actionMovies,
   comedyMovies,
@@ -73,21 +72,7 @@ const Home = ({
   )
 }
 
-export default Home
-// export const getServerSideProps = async () => {
-//   const products = await getProducts(payments, {
-//     includePrices: true,
-//     activeOnly: true,
-//   })
-//     .then((res) => res)
-//     .catch((error) => console.log(error.message))
-// export const getServerSideProps = async () => {
-//   const products = await getDocs(collection(db, "products"), {
-//     includePrices: true,
-//     activeOnly: true,
-//   })
-//     .then((res) => res)
-//     .catch((error) => console.log(error.message))
+export default Dashboard
 
 export const getServerSideProps = async () => {
   const [
